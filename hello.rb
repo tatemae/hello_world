@@ -9,11 +9,15 @@ Bundler.require(:default)
 require 'ruby-debug'
 
 require 'goliath'
+require 'lib/rack/cors'
 
 class HelloWorld < Goliath::API
   use Goliath::Rack::Params
+  use Slurper::Rack::Cors
+  
   def response(env)
     debugger
+    env[:foo] = 'test'
     [200, {}, env.params[:hello]]
   end
 end
