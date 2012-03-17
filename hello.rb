@@ -9,13 +9,14 @@ require "bundler/setup"
 
 Bundler.require(:default)
 
+require 'ruby-debug'
 
 require 'goliath'
 
 class HelloWorld < Goliath::API
   use Goliath::Rack::Params
-  
   def response(env)
+    debugger
     [200, {}, env.params[:hello]]
   end
 end
