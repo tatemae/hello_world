@@ -13,7 +13,9 @@ Bundler.require(:default)
 require 'goliath'
 
 class HelloWorld < Goliath::API
+  use Goliath::Rack::Params
+  
   def response(env)
-    [200, {}, "hello world"]
+    [200, {}, env.params[:hello]]
   end
 end
