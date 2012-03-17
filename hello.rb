@@ -17,5 +17,7 @@ class HelloWorld < Goliath::API
   
   def response(env)
     [200, {}, env.params[:hello]]
+  rescue => ex
+    Error.respond(env, params, {}, ex)
   end
 end

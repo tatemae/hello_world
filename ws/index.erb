@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket ...</title>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'></script>
+    <script>
+      function debug(str)
+      {
+        $("#debug").append("<p>" + str + "</p>");
+      };
+
+      $(document).ready(function()
+      {
+        if (!("WebSocket" in window))
+        {
+          alert("Sorry, WebSockets unavailable.");
+          return;
+        }
+
+        var ws = new WebSocket("ws://localhost:9000/ws");
+        ws.onmessage = function(evt) { $("#msg").append("<p>" + evt.data + "</p>"); };
+        ws.onclose = function() { debug("socket closed"); };
+        ws.onopen = function() { debug("connected..."); };
+
+        $('#submit').click(function()
+        {
+          var nick = $('#nick').val();
+          var msg = $('#message').val();
+
+          ws.send(nick + ": " + msg);
+          return false;
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <form>
+      <label>Nick</label>
+      <input type='text' autofocus='true' id='nick' name='nick' value='anon' size='20' /><br />
+
+      <label>Message</label>
+      <input type='text' autofocus='true' id='message' name='message' value='' size='80' />&nbsp;
+      <input type='submit' id='submit' />
+    </form>
+
+    <div id="debug"></div>
+    <div id="msg"></div>
+  </body>
+</html>
