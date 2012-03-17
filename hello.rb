@@ -16,8 +16,6 @@ class HelloWorld < Goliath::API
   use Slurper::Rack::Cors
   
   def response(env)
-    debugger
-    env[:foo] = 'test'
     [200, {}, env.params[:hello]]
   end
 end
