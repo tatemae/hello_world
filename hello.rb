@@ -1,7 +1,4 @@
 #!/usr/bin/env ruby
-#$:<< '../lib' << 'lib'
-
-#!/usr/bin/env ruby
 $: << File.dirname(__FILE__)
 
 require 'rubygems'
